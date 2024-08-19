@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "tensora-cffi"
+version = "0.1.0"
+description = "Backend compiler using CFFI for Tensora"
+authors = ["David Hagen <david@drhagen.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/drhagen/tensora-cffi"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cffi = "^1.16"
+# setuptools is required by cffi on Python 3.12 and up
+# https://cffi.readthedocs.io/en/latest/whatsnew.html#v1-16-0rc1
+setuptools = { version = "^69", python = ">=3.12" }
+
+[tool.poetry.dev-dependencies]
+nox_poetry = "^1.0.3"
+
+# Test
+pytest = "^8"
+pytest-cov = "*"
+
+# Lint
+ruff = "^0.5"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.paths]
+source = [
+    "src/",
+    ".nox/test*/lib/python*/site-packages/",
+    ".nox/test*/Lib/site-packages/",
+    "*/tensora-cffi/src/",
+]
+
+[tool.ruff]
+src = ["src"]
+line-length = 99
+
+extend-exclude = ["src/taco/**"]
+
+[tool.ruff.lint]
+extend-select = [
+    "I", # isort
+    "N", # pep8-naming
+    "RUF", # ruff
+    "B", # flake8-bugbear
+    "N", # flake8-broken-line
+    "C4", # flake8-comprehensions
+    "PIE", # flake8-pie
+    "PT", # flake8-pytest-style
+    "PTH", # flake8-use-pathlib
+    "ERA", # flake8-eradicate
+]
+
+[tool.ruff.lint.per-file-ignores]
+# F401: Allow unused imports in __init__.py
+"__init__.py" = ["F401"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
