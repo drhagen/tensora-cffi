@@ -30,7 +30,7 @@ pytest = "^8"
 pytest-cov = "*"
 
 # Lint
-ruff = "^0.5"
+ruff = "^0.6"
 
 [tool.coverage.run]
 branch = true
@@ -46,8 +46,6 @@ source = [
 [tool.ruff]
 src = ["src"]
 line-length = 99
-
-extend-exclude = ["src/taco/**"]
 
 [tool.ruff.lint]
 extend-select = [
